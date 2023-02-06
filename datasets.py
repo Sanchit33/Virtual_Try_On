@@ -54,4 +54,10 @@ class VITONDataset(data.Dataset):
             parse_arm = (np.array(mask_arm) / 255) * (parse_array == parse_id).astype(np.float32)
             agnostic.paste(0, None, Image.fromarray(np.uint8(parse_arm * 255), 'L'))
 
+        # mask torso & neck
+        agnostic.paste(0, None, Image.fromarray(np.uint8(parse_upper * 255), 'L'))
+        agnostic.paste(0, None, Image.fromarray(np.uint8(parse_neck * 255), 'L'))
+
+        return agnostic    
+
     
