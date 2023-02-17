@@ -58,6 +58,17 @@ class VITONDataset(data.Dataset):
         agnostic.paste(0, None, Image.fromarray(np.uint8(parse_upper * 255), 'L'))
         agnostic.paste(0, None, Image.fromarray(np.uint8(parse_neck * 255), 'L'))
 
-        return agnostic    
+        return agnostic
+
+    def get_img_agnostic(self, img, parse, pose_data):
+        parse_array = np.array(parse)
+        parse_head = ((parse_array == 4).astype(np.float32) +
+                (parse_array == 13).astype(np.float32))
+        parse_lower = ((parse_array == 9).astype(np.float32) +
+                    (parse_array == 12).astype(np.float32) +
+                    (parse_array == 16).astype(np.float32) +
+                    (parse_array == 17).astype(np.float32) +
+                    (parse_array == 18).astype(np.float32) +
+                    (parse_array == 19).astype(np.float32))    
 
     
